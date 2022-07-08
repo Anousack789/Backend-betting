@@ -1,6 +1,6 @@
-import colors from 'colors';
+const colors from 'colors';
 colors.enable();
-export default {
+module.exports = {
   error: function (msg: any) {
     const date = new Date();
     console.error(`[${date.toUTCString()}] : ${msg}`);

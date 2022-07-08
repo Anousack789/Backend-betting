@@ -1,4 +1,5 @@
-export default (err: any, req: any, res: any, next: any) => {
+'use strict';
+module.exports = (err, _, res, _) => {
   console.log('Error: ', err && err.message);
   const statusCode = res.statusCode !== 200 ? res.statusCode : 500;
   res.status(statusCode);

@@ -1,6 +1,6 @@
-import { Sequelize } from 'sequelize';
-import config from '../../config';
-import logger from './logger';
+const { Sequelize } from 'sequelize';
+const config from '../../config';
+const logger from './logger';
 const sequelize = new Sequelize(
   config.db.database,
   config.db.username,
@@ -25,4 +25,4 @@ const sequelize = new Sequelize(
     console.error('Unable to connect to the database:', error);
   }
 })();
-export default sequelize;
+module.exports = sequelize;

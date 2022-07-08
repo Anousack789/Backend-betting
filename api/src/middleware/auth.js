@@ -1,7 +1,8 @@
-import passport from 'passport';
-import client from '../utils/redis';
+'use strict';
+const passport = require('passport');
+const client = require('../utils/redis');
 
-export default {
+module.exports = {
   initialize: (app) => {
     app.use((req, res, next) => {
       try {

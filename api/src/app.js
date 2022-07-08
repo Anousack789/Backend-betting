@@ -1,10 +1,11 @@
-import express from 'express';
-import morgan from 'morgan';
-import bodyParser from 'body-parser';
-import cookieParser from 'cookie-parser';
-import helmet from 'helmet';
-import path from 'path';
-import api from './api';
+'use strict';
+const express = require('express');
+const morgan = require('morgan');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const helmet = require('helmet');
+const path = require('path');
+const api = require('./api');
 
 const app = express();
 app.use(bodyParser.json());
@@ -39,11 +40,11 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'pages/homepage.html'));
 });
 
-import errorHandler from './middleware/error-handler';
-import notFound from './middleware/not-found';
+const errorHandler = require('./middleware/error-handler');
+const notFound = require('./middleware/not-found');
 app.use(errorHandler);
 app.use(notFound);
 
 app.use('/api/v1', api);
 
-export default app;
+module.exports = app;

@@ -1,4 +1,4 @@
-import { createClient } from 'redis';
+const { createClient } from 'redis';
 const client = createClient();
 
 client.on('error', (err) => {
@@ -17,4 +17,4 @@ client.on('connect', () => {
   }
 })();
 
-export default client;
+module.exports = client;
