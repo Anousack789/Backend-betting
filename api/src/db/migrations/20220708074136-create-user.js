@@ -6,49 +6,50 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       UserId: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
-      Name: {
-        type: Sequelize.STRING
+      UserName: {
+        type: Sequelize.STRING,
+      },
+      Password: {
+        type: Sequelize.STRING,
+      },
+      HashPass: {
+        type: Sequelize.BOOLEAN,
       },
       Avatar: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       Wallet: {
-        type: Sequelize.DOUBLE
+        type: Sequelize.DOUBLE,
       },
       BonusCredit: {
-        type: Sequelize.DOUBLE
+        type: Sequelize.DOUBLE,
       },
       Email: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       ContactNo: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       WithdrawalDetails: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+      },
+      UserStatus: {
+        type: Sequelize.INTEGER,
       },
       DateOfRegistration: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       LastUpdated: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
     });
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Users');
-  }
+  },
 };

@@ -1,5 +1,6 @@
-import assert from 'assert';
-import dotenv from 'dotenv';
+'use strict';
+const assert = require('assert');
+const dotenv = require('dotenv');
 dotenv.config();
 const {
   PORT,
@@ -21,7 +22,7 @@ assert(JWT_SECRET, 'JWT_SECRET is required');
 assert(SERVER_KEY, 'SERVER_KEY is required');
 assert(SOCKET_TOKEN_KEY, 'SOCKET_TOKEN_KEY is required');
 
-export default {
+module.exports = {
   port: PORT,
   db: {
     username: DB_USERNAME,

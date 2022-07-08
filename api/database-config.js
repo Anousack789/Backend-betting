@@ -1,4 +1,5 @@
-import config from './../../config';
+'use strict';
+const config = require('./config');
 
 module.exports = {
   development: {
