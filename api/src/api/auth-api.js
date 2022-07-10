@@ -91,7 +91,6 @@ router.post('/auth/login', async (req, res) => {
           expires: expiresIn,
         });
         const menuEncrypted = myCrypto.encrypt(JSON.stringify(myMenus));
-
         res.status(200).json({ token: menuEncrypted, expiresIn });
       } else {
         res.status(400).json({ message: 'Invalid password' });

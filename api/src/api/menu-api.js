@@ -13,6 +13,23 @@ router.get('/menu', async (req, res) => {
   const user = req.user;
   if (user.roles.include('Admin')) {
     try {
+      const menus = Menu.findAll({
+        include: [
+          {
+            model: RoleMenu,
+            include: [
+              {
+                model: Role,
+              },
+            ],
+          },
+        ],
+      });
+      menus.forEach((m) => {
+        m.Roles = m.RoleMenus.map((rm) => rm.Role);
+        m.RoleMenus = undefined;
+      });
+      res.status(200).json(menus);
     } catch (err) {
       console.error(err);
       res.status(500).send('Internal Server Error');
