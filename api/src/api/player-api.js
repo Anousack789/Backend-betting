@@ -1,10 +1,9 @@
 const express = require('express');
-const database = require('../utils/database');
+const { sequelize } = require('../utils/database');
 const router = express.Router();
-const { DataTypes } = require('sequelize');
-const User = require('../db/models/user')(database, DataTypes);
-const UserRole = require('../db/models/userrole')(database, DataTypes);
-const Role = require('../db/models/role')(database, DataTypes);
+const User = require('../db/models/user')(sequelize);
+const UserRole = require('../db/models/userrole')(sequelize);
+const Role = require('../db/models/role')(sequelize);
 
 User.hasMany(UserRole, { foreignKey: 'userId' });
 Role.hasMany(UserRole, { foreignKey: 'roleId' });

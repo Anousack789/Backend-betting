@@ -1,16 +1,16 @@
 'use strict';
 const { Model, DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
-  class UserRole extends Model {}
-  UserRole.init(
+  class RoleMenu extends Model {}
+  RoleMenu.init(
     {
-      UserId: DataTypes.INTEGER,
       RoleId: DataTypes.INTEGER,
+      MenuId: DataTypes.INTEGER,
     },
     {
       sequelize,
-      modelName: 'UserRole',
+      modelName: 'RoleMenu',
     }
   );
-  return UserRole;
+  return RoleMenu;
 };

@@ -1,6 +1,7 @@
-const { Sequelize } from 'sequelize';
-const config from '../../config';
-const logger from './logger';
+'use strict';
+const { Sequelize } = require('sequelize');
+const config = require('../../config');
+const logger = require('./logger');
 const sequelize = new Sequelize(
   config.db.database,
   config.db.username,
@@ -8,6 +9,7 @@ const sequelize = new Sequelize(
   {
     host: config.db.host,
     dialect: 'mssql',
+    operatorsAliases: 0,
     logging: false,
     dialectOptions: {
       options: {
@@ -25,4 +27,4 @@ const sequelize = new Sequelize(
     console.error('Unable to connect to the database:', error);
   }
 })();
-module.exports = sequelize;
+module.exports = { sequelize };

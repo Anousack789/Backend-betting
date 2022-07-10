@@ -11,6 +11,7 @@ const {
   JWT_SECRET,
   SERVER_KEY,
   SOCKET_TOKEN_KEY,
+  IV,
 } = process.env;
 
 assert(PORT, 'PORT is required');
@@ -21,6 +22,7 @@ assert(DB_NAME, 'DB_NAME is required');
 assert(JWT_SECRET, 'JWT_SECRET is required');
 assert(SERVER_KEY, 'SERVER_KEY is required');
 assert(SOCKET_TOKEN_KEY, 'SOCKET_TOKEN_KEY is required');
+assert(IV, 'IV is required');
 
 module.exports = {
   port: PORT,
@@ -34,5 +36,6 @@ module.exports = {
     secret: JWT_SECRET,
   },
   serverKey: SERVER_KEY,
+  iv: IV,
   socketTokenKey: SOCKET_TOKEN_KEY,
 };

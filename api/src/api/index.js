@@ -3,12 +3,16 @@ const express = require('express');
 const adminApi = require('./admin-api');
 const agentApi = require('./agent-api');
 const playerApi = require('./player-api');
-const userApi = require('./user-api');
+const authApi = require('./auth-api');
+const menuApi = require('./menu-api');
+const walletApi = require('./wallet-api');
 
 const router = express.Router();
-router.use('/admin', adminApi);
-router.use('/agent', agentApi);
-router.use('/player', playerApi);
-router.use('/user', userApi);
+router.use(adminApi);
+router.use(agentApi);
+router.use(playerApi);
+router.use(authApi);
+router.use(menuApi);
+router.use(walletApi);
 
 module.exports = router;

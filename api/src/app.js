@@ -8,13 +8,15 @@ const path = require('path');
 const api = require('./api');
 
 const app = express();
+require('./utils/passport');
+require('./middleware/auth')(app);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Credentials', 'true');
-  res.header('Access-Control-Allow-Origin', req.headers.origin);
+  res.header('Access-Control-Allow-Origin', '*');
   res.header(
     'Access-Control-Allow-Methods',
     'GET,PUT,POST,DELETE,UPDATE,OPTIONS'
@@ -40,11 +42,11 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'pages/homepage.html'));
 });
 
+app.use('/api/v1', api);
+
 const errorHandler = require('./middleware/error-handler');
 const notFound = require('./middleware/not-found');
 app.use(errorHandler);
 app.use(notFound);
-
-app.use('/api/v1', api);
 
 module.exports = app;

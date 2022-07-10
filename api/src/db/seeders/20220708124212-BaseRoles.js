@@ -22,8 +22,8 @@ module.exports = {
           Name: 'Player',
         },
       ].map((role) => {
-        role.CreatedAt = new Date();
-        role.UpdatedAt = new Date();
+        role.createdAt = new Date();
+        role.updatedAt = new Date();
         return role;
       }),
       {},

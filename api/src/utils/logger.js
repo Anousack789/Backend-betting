@@ -1,11 +1,12 @@
-const colors from 'colors';
+'use strict';
+const colors = require('colors');
 colors.enable();
 module.exports = {
-  error: function (msg: any) {
+  error: function (msg) {
     const date = new Date();
     console.error(`[${date.toUTCString()}] : ${msg}`);
   },
-  log: function (msg: any, color = 'default', address = '', userAgent = '') {
+  log: function (msg, color = 'default', address = '', userAgent = '') {
     const date = new Date();
     const myMsg = `[${date.toLocaleString()}]${address} ${userAgent}: ${msg}`;
     switch (color) {

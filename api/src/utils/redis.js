@@ -1,4 +1,5 @@
-const { createClient } from 'redis';
+'use strict';
+const { createClient } = require('redis');
 const client = createClient();
 
 client.on('error', (err) => {
