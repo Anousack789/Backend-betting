@@ -1,7 +1,8 @@
 const passport = require('passport');
-const Menu = require('../db/models/menu');
-const RoleMenu = require('../db/models/rolemenu');
-const Role = require('../db/models/role');
+const { sequelize } = require('../utils/database');
+const Menu = require('../db/models/menu')(sequelize);
+const RoleMenu = require('../db/models/rolemenu')(sequelize);
+const Role = require('../db/models/role')(sequelize);
 Role.hasMany(RoleMenu, { foreignKey: 'RoleId' });
 Menu.hasMany(RoleMenu, { foreignKey: 'MenuId' });
 RoleMenu.belongsTo(Role, { foreignKey: 'RoleId' });

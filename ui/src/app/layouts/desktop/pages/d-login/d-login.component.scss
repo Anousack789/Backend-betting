@@ -1,0 +1,20 @@
+@use "../../../../foundations/colors.scss" as colors;
+main {
+  position: relative;
+  min-height: 100vh;
+  .mat-card {
+    width: 450px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    .my-container,
+    form {
+      display: flex;
+      flex-direction: column;
+      button {
+        background-color: colors.$primaryColor;
+      }
+    }
+  }
+}
