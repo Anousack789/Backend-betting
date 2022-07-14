@@ -91,7 +91,13 @@ router.post('/auth/login', async (req, res) => {
           expires: expiresIn,
         });
         const menuEncrypted = myCrypto.encrypt(JSON.stringify(myMenus));
-        res.status(200).json({ token: menuEncrypted, expiresIn });
+        res.status(200).json({
+          avatar: user.Avatar,
+          userName: user.UserName,
+          wallet: user.Wallet,
+          token: menuEncrypted,
+          expiresIn,
+        });
       } else {
         res.status(400).json({ message: 'Invalid password' });
       }
@@ -114,12 +120,7 @@ router.post(
       if (redisUserRecord) {
         const parsedData = JSON.parse(redisUserRecord);
         parsedData[String(id)].push(authToken);
-        client.setEx(
-          String(id),
-          parsedData,
-          7 * 24 * 60 * 60,
-          JSON.stringify(parsedData)
-        );
+        client.setEx(String(id), 7 * 24 * 60 * 60, JSON.stringify(parsedData));
         res.clearCookie('api-auth');
         res.status(200).json({ message: 'Logged out' });
       } else {

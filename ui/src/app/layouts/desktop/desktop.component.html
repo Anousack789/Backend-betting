@@ -1,2 +1,53 @@
-<p>desktop works!</p>
-<router-outlet></router-outlet>
+<main>
+  <section class="side-bar" *ngIf="showSideBar" [@sideBar]>
+    <div class="side-bar-content">
+      <div class="logo">
+        <img src="../../../assets/wegotskillz-logo.png" alt="" />
+      </div>
+
+      <div class="menu-container">
+        <div class="menu-item" *ngFor="let item of mainMenu(); let i = index" (mouseenter)="showIndex = i + 1" (mouseleave)="showIndex = 0">
+          <a href="javascript:void(0);" [routerLink]="[item.MenuUrl]" [ngClass]="{ 'router-link-active': mainMenuSelect == item.MenuDisplayName }">
+            <mat-icon [innerHTML]="item.MenuIcon"></mat-icon>
+            <p>{{ item.MenuDisplayName }}</p>
+          </a>
+          <!-- <div class="sub-menu" *ngIf="subMenu(item.id).length > 0 && showIndex == i + 1">
+            <div class="sub-menu-item" *ngFor="let sub of subMenu(item.id)">
+              <a href="javascript:void(0);" [routerLink]="[sub.MenuUrl]" routerLinkActive="router-link-active">
+                <p>{{ sub.MenuDisplayName }}</p>
+              </a>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="container">
+    <div class="tab-bar">
+      <div class="tab-bar-content">
+        <div class="tab-left-side"></div>
+        <div class="tab-right-side">
+          <div class="wallet">
+            <div class="wallet-icon">
+
+              <mat-icon>wallet</mat-icon>
+            </div>
+            <p>1000 $</p>
+          </div>
+          <div class="account">
+            <a class="account-circle" href="javascript:void(0);" [matMenuTriggerFor]="accountMenu">
+              <mat-icon>account_circle</mat-icon>
+            </a>
+            <mat-menu #accountMenu="matMenu">
+              <button mat-menu-item [routerLink]="['/account']">Account</button>
+              <button mat-menu-item (click)="signOut()">Sign out</button>
+            </mat-menu>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="router">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</main>

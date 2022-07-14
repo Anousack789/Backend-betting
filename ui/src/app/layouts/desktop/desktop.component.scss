@@ -1,0 +1,194 @@
+@use "../../foundations/colors.scss" as colors;
+@use "../../foundations/box-shadows.scss" as boxShadows;
+$sideBarWidth: 170px;
+main {
+  display: flex;
+  height: 100vh;
+  position: relative;
+  .side-bar-mob {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    height: 100vh;
+  }
+  .side-bar {
+    min-width: $sideBarWidth;
+    position: relative;
+    z-index: 2;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    display: flex;
+    flex-direction: column;
+    background-color: colors.$bgColor;
+
+    box-shadow: boxShadows.$s4;
+    .side-bar-content {
+      height: 100%;
+      width: $sideBarWidth;
+      position: absolute;
+      top: 0;
+      right: 0;
+
+      .logo {
+        img {
+          max-width: 100%;
+          max-height: 100%;
+        }
+      }
+
+      .menu-container {
+        display: flex;
+        flex-direction: column;
+        width: $sideBarWidth + 10px;
+        $menuItemHeight: 55px;
+        overflow: auto;
+        height: calc(100vh - $sideBarWidth - 10px);
+        .menu-item {
+          min-height: $menuItemHeight;
+          display: grid;
+          color: white;
+          transition: 0.5s;
+          text-decoration: none;
+          position: relative;
+          a {
+            text-decoration: none;
+            padding: 16px 0;
+            color: white;
+            height: $menuItemHeight;
+            transition: 0.2s;
+            display: flex;
+            padding: 0 10px;
+            align-items: center;
+            width: calc(100% - 10px);
+            .mat-icon {
+              min-width: 40px;
+            }
+            p {
+              width: 100%;
+              margin: 0;
+            }
+          }
+
+          .router-link-active {
+            background: colors.$secondColor !important;
+            color: #fff !important;
+            border-radius: 0 10px 10px 0;
+            position: absolute;
+            width: calc($sideBarWidth + 10px);
+          }
+
+          .sub-menu {
+            position: absolute;
+            width: $sideBarWidth;
+            right: -100%;
+            top: 0;
+            background: colors.$primaryColor;
+            display: grid;
+
+            .sub-menu-item {
+              display: grid;
+              border-bottom: colors.$primaryColor solid 1px;
+              a {
+                width: 100%;
+                padding: 8px 0;
+                font-size: 14px;
+                background: white;
+              }
+              .router-link-active {
+                background: #eba12f;
+                color: #fff;
+              }
+            }
+          }
+        }
+        .menu-item:hover > a {
+          background: #fff;
+          color: #eba12f;
+        }
+      }
+    }
+  }
+  .container {
+    display: grid;
+    position: relative;
+    z-index: 1;
+    overflow: auto;
+    height: 100vh;
+    width: 100%;
+    .tab-bar {
+      padding: 10px;
+      padding-bottom: 0;
+      .tab-bar-content {
+        border-radius: 10px;
+        margin: 0 5px;
+        height: 50px;
+        background: white;
+        box-shadow: boxShadows.$s4;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 10px;
+        .tab-right-side {
+          display: flex;
+          gap: 10px;
+          .wallet {
+            display: flex;
+            align-items: center;
+            background-color: colors.$primaryColor;
+            width: 140px;
+            height: 35px;
+            margin: auto 0;
+            border-radius: 25px;
+            .wallet-icon {
+              padding: 0 10px;
+              width: 50px;
+              margin-left: 0px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
+            .mat-icon {
+              color: white;
+              transform: scale(1);
+            }
+            p {
+              color: white;
+              text-align: center;
+              width: 100%;
+            }
+          }
+          .account-circle {
+            width: 65px;
+            height: 65px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: colors.$primaryColor;
+          }
+          .mat-icon {
+            transform: scale(1.8);
+          }
+        }
+      }
+    }
+    .spacer {
+      width: 100%;
+    }
+    .router {
+      height: calc(100vh - 64px);
+      overflow: auto;
+      padding: 1rem;
+    }
+    .router-mob {
+      padding: 0;
+      padding-top: 1rem;
+    }
+  }
+  .btn-close-side-bar {
+    margin: 1rem auto;
+    width: 100%;
+    mat-icon {
+      color: white;
+    }
+  }
+}

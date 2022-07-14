@@ -6,16 +6,18 @@ const routes: Routes = [
   {
     path: '',
     component: DesktopComponent,
+    loadChildren: () =>
+      import('./d-pages/d-page.module').then((m) => m.DPageModule),
   },
   {
     path: 'login',
     loadChildren: () =>
-      import('./pages/d-login/d-login.module').then((m) => m.DLoginModule),
+      import('./d-pages/d-login/d-login.module').then((m) => m.DLoginModule),
   },
   {
     path: 'register',
     loadChildren: () =>
-      import('./pages/d-register/d-register.module').then(
+      import('./d-pages/d-register/d-register.module').then(
         (m) => m.DRegisterModule
       ),
   },

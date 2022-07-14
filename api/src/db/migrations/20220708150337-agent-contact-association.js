@@ -2,10 +2,10 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.addConstraint('AgentContacts', {
+    await queryInterface.addConstraint('AgentContracts', {
       fields: ['AgentId'],
       type: 'FOREIGN KEY',
-      name: 'FK_AgentContacts_AgentId',
+      name: 'FK_AgentContracts_AgentId',
       references: {
         table: 'Users',
         field: 'id',
@@ -15,8 +15,8 @@ module.exports = {
 
   async down(queryInterface, Sequelize) {
     await queryInterface.removeConstraint(
-      'AgentContacts',
-      'FK_AgentContacts_AgentId'
+      'AgentContracts',
+      'FK_AgentContracts_AgentId'
     );
   },
 };

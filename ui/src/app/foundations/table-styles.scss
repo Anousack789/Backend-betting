@@ -1,0 +1,78 @@
+@use "./colors.scss" as colors;
+@use "./box-shadows.scss" as boxShadows;
+.table-container {
+  margin-top: 40px;
+  .mat-elevation-z8 {
+    border-radius: 5px;
+    background-color: white;
+  }
+  .table-header {
+    gap: 10px;
+    padding: 10px;
+    background-color: colors.$bgColor;
+    margin: 10px;
+    border-radius: 5px;
+    position: relative;
+    top: -15px;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    box-shadow: boxShadows.$s2;
+    .search-wrapper {
+      background-color: #fff;
+      display: flex;
+      width: 300px;
+      height: 40px;
+      padding: 0 10px;
+      gap: 10px;
+      align-items: center;
+      border-radius: 5px;
+      .mat-icon {
+        color: #333;
+      }
+      input {
+        height: 100%;
+        width: 100%;
+        background: none;
+        outline: none;
+        border: none;
+        color: #333;
+        font-size: 14px;
+        &::placeholder {
+          color: #333;
+          font-size: 14px;
+        }
+      }
+    }
+    .mat-raised-button {
+      min-width: 60px;
+      height: 40px;
+      margin: auto 0;
+      background-color: colors.$themeColor !important;
+      color: white;
+    }
+  }
+  .table-wrapper {
+    top: 20px;
+    overflow: auto;
+    max-width: 100%;
+    .mat-table {
+      min-width: 100%;
+
+      border-top: 1px solid #e0e0e0;
+      td:nth-child(2),
+      th:nth-child(2) {
+        padding-left: 8px;
+      }
+    }
+    td.mat-column-process {
+      width: 50px;
+      padding-left: 8px;
+    }
+  }
+  .mat-paginator {
+    border-radius: 5px !important;
+  }
+}
