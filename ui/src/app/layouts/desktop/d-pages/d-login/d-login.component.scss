@@ -2,6 +2,7 @@
 main {
   position: relative;
   min-height: 100vh;
+  background: colors.$bgColor;
   .mat-card {
     width: 450px;
     top: 50%;
@@ -12,8 +13,37 @@ main {
     form {
       display: flex;
       flex-direction: column;
-      button {
-        background-color: colors.$primaryColor;
+      .remember-password {
+        margin-bottom: 20px;
+      }
+      .btn-wrap {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-bottom: 20px;
+        button {
+          background-color: gainsboro;
+        }
+        .primary {
+          background-color: colors.$primaryColor;
+          color: white;
+        }
+      }
+      .social-wrap {
+        margin: 20px auto;
+        display: flex;
+        gap: 10px;
+        .social {
+          aspect-ratio: 1;
+        }
+      }
+    }
+
+    .my-container {
+      header {
+        margin-bottom: 30px;
+        margin-top: 10px;
+        color: colors.$primaryColor;
       }
     }
   }

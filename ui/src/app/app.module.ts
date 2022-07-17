@@ -10,6 +10,10 @@ import { HttpInterceptorService } from './services/http-interceptor.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LoadingComponent } from './components/loading/loading.component';
 import { CookieService } from 'ngx-cookie-service';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideMessaging,getMessaging } from '@angular/fire/messaging';
 
 @NgModule({
   declarations: [AppComponent, PageNotFoundComponent, LoadingComponent],
@@ -19,6 +23,9 @@ import { CookieService } from 'ngx-cookie-service';
     HttpClientModule,
     BrowserAnimationsModule,
     FontAwesomeModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideMessaging(() => getMessaging()),
   ],
   providers: [
     CookieService,

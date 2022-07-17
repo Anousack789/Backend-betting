@@ -6,6 +6,7 @@ import { MenuService } from 'src/app/services/menu.service';
 import { MyCryptoService } from 'src/app/services/my-crypto.service';
 import { SubSink } from 'subsink';
 import Swal from 'sweetalert2';
+import {} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-d-login',
@@ -24,13 +25,44 @@ export class DLoginComponent implements OnInit, OnDestroy {
   loginForm = this.fb.group({
     userName: ['', [Validators.required, Validators.minLength(4)]],
     password: ['', [Validators.required, Validators.minLength(8)]],
+    rememberPassword: [false],
   });
 
   private subs = new SubSink();
 
   private onLoading = false;
 
-  ngOnInit(): void {}
+  private rememberPassword = false;
+
+  ngOnInit(): void {
+    this.rememberPassword = localStorage.getItem('rememberPassword') == 'true';
+    if (this.rememberPassword) {
+      const remember = localStorage.getItem('remember');
+      if (remember) {
+        const rememberDecrypted = this.myCrypto.decrypt(remember);
+        const rememberJson = JSON.parse(rememberDecrypted);
+        this.loginForm.patchValue({
+          ...rememberJson,
+          rememberPassword: this.rememberPassword,
+        });
+      } else {
+        this.loginForm.patchValue({ rememberPassword: this.rememberPassword });
+      }
+    }
+    this.subs.sink =
+      this.loginForm.controls.rememberPassword.valueChanges.subscribe({
+        next: (res) => {
+          if (res) {
+            localStorage.setItem('rememberPassword', 'true');
+          } else {
+            localStorage.setItem('rememberPassword', 'false');
+          }
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+  }
 
   ngOnDestroy(): void {
     this.subs.unsubscribe();
@@ -41,6 +73,16 @@ export class DLoginComponent implements OnInit, OnDestroy {
     if (this.loginForm.valid && !this.onLoading) {
       this.onLoading = true;
       const { userName, password } = this.loginForm.value;
+      if (this.rememberPassword) {
+        const remember = {
+          userName,
+          password,
+        };
+        const rememberEncrypted = this.myCrypto.encrypt(
+          JSON.stringify(remember)
+        );
+        localStorage.setItem('remember', rememberEncrypted);
+      }
       this.subs.sink = this.authService.login(userName!, password!).subscribe({
         next: (res) => {
           this.onLoading = false;

@@ -70,6 +70,32 @@
     td.mat-column-process {
       width: 50px;
       padding-left: 8px;
+      .actions {
+        display: flex;
+        padding: 5px;
+        gap: 5px;
+        .btn-action {
+          background-color: colors.$primaryColor;
+          color: white;
+          width: 40px;
+          height: 30px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 5px;
+          border: none;
+          box-shadow: boxShadows.$s4;
+          transition: 0.2s;
+          cursor: pointer;
+          .mat-icon {
+            transform: scale(0.7);
+          }
+          &:hover {
+            transform: translateY(-2px);
+            box-shadow: boxShadows.$s5;
+          }
+        }
+      }
     }
   }
   .mat-paginator {

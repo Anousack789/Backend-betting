@@ -118,11 +118,11 @@ main {
       padding: 10px;
       padding-bottom: 0;
       .tab-bar-content {
-        border-radius: 10px;
+        border-radius: 5px;
         margin: 0 5px;
         height: 50px;
         background: white;
-        box-shadow: boxShadows.$s4;
+        box-shadow: boxShadows.$s5;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -166,7 +166,7 @@ main {
             color: colors.$primaryColor;
           }
           .mat-icon {
-            transform: scale(1.8);
+            transform: scale(1.7);
           }
         }
       }

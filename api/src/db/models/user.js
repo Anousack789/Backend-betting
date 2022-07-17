@@ -14,7 +14,13 @@ module.exports = (sequelize) => {
       Email: DataTypes.STRING,
       ContactNo: DataTypes.STRING,
       WithdrawalDetails: DataTypes.STRING,
-      UserStatus: DataTypes.INTEGER,
+      UserStatus: DataTypes.INTEGER, // 0: inactive, 1: active, 2: suspended
+      FirstName: DataTypes.STRING,
+      LastName: DataTypes.STRING,
+      BirthDate: DataTypes.DATE,
+      Gender: DataTypes.INTEGER, // 0: male, 1: female, 2: other
+      BankName: DataTypes.STRING,
+      BankAccount: DataTypes.STRING,
       DateOfRegistration: DataTypes.DATE,
       LastUpdated: DataTypes.DATE,
     },

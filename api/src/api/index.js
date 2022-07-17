@@ -7,6 +7,7 @@ const authApi = require('./auth-api');
 const menuApi = require('./menu-api');
 const walletApi = require('./wallet-api');
 const transactionApi = require('./transaction-api');
+const masterAgentApi = require('./master-agent-api');
 
 const router = express.Router();
 router.use(adminApi);
@@ -16,5 +17,6 @@ router.use(authApi);
 router.use(menuApi);
 router.use(walletApi);
 router.use(transactionApi);
+router.use(masterAgentApi);
 
 module.exports = router;

@@ -8,6 +8,13 @@ export interface IUser {
   BonusCredit: number;
   WithdrawalDetails: string;
   UserStatus: number;
+  PreFix: string;
+  FirstName: string;
+  LastName: string;
+  Gender: number;
+  BirthDate: Date;
+  BankName: string;
+  BankAccount: string;
   DateOfRegistration: Date;
   LastUpdated: Date;
   Roles: string[];

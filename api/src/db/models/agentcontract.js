@@ -6,11 +6,11 @@ module.exports = (sequelize) => {
     {
       AgentId: DataTypes.INTEGER,
       DepositCommission: DataTypes.DOUBLE,
-      DepositType: DataTypes.INTEGER,
+      DepositType: DataTypes.INTEGER, // 0: value, 1: percentage
       WithdrawalCommission: DataTypes.DOUBLE,
-      WithdrawalType: DataTypes.INTEGER,
+      WithdrawalType: DataTypes.INTEGER, // 0: value, 1: percentage
       RecruitCommission: DataTypes.DOUBLE,
-      RecruitType: DataTypes.INTEGER,
+      RecruitType: DataTypes.INTEGER, // 0: value, 1: percentage
       DateCreated: DataTypes.DATE,
     },
     {

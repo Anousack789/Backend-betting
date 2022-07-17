@@ -1,1 +1,123 @@
-<p>d-register works!</p>
+<main>
+  <mat-card>
+    <div class="my-container">
+      <header>
+        <h2>Register Form</h2>
+      </header>
+      <mat-divider></mat-divider>
+      <section>
+        <form novalidate *ngIf="registerForm" [formGroup]="registerForm">
+          <mat-form-field appearance="outline">
+            <mat-label>Token</mat-label>
+            <input matInput placeholder="Received From Agent or Master Agent" formControlName="token" />
+            <mat-error *ngIf="registerForm.controls['token'].invalid">
+              {{getErrorMessage('token')}}
+            </mat-error>
+            <mat-icon matSuffix>token</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>User Name</mat-label>
+            <input matInput formControlName="userName" />
+
+            <mat-error *ngIf="registerForm.controls['userName'].invalid">
+              {{getErrorMessage('userName')}}
+            </mat-error>
+
+            <mat-icon matSuffix>people</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput #inputPassword type="password" placeholder="minimum 6 character" formControlName="password" />
+            <mat-error *ngIf="registerForm.controls['password'].invalid">
+              {{getErrorMessage('password')}}
+            </mat-error>
+
+            <mat-icon matSuffix *ngIf="showPassword; else hidePass" (click)="hidePassFunc()">visibility</mat-icon>
+            <ng-template #hidePass>
+              <mat-icon matSuffix (click)="hidePassFunc()">visibility_off</mat-icon>
+            </ng-template>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Confirm Password</mat-label>
+            <input matInput type="password" #inputConfirmPassword formControlName="confirmPassword" [errorStateMatcher]="matcher" />
+            <mat-error *ngIf="registerForm.hasError('notSame')">
+              {{getErrorMessage('confirmPassword')}}
+            </mat-error>
+            <mat-icon matSuffix *ngIf="showConfirmPassword; else hideConfirmPass" (click)="hideConfirmPassFunc()">visibility</mat-icon>
+            <ng-template #hideConfirmPass>
+              <mat-icon matSuffix (click)="hideConfirmPassFunc()">visibility_off</mat-icon>
+            </ng-template>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="email123@gmail.com" formControlName="email" />
+            <mat-error *ngIf="registerForm.controls['email'].invalid">
+              {{getErrorMessage('email')}}
+            </mat-error>
+
+            <mat-icon matSuffix>email</mat-icon>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>First Name</mat-label>
+            <input matInput formControlName="firstName" />
+
+          </mat-form-field>
+
+
+          <mat-form-field appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="lastName" />
+
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Gender</mat-label>
+            <mat-select formControlName="gender">
+              <mat-option value="0">Male</mat-option>
+              <mat-option value="1">Female</mat-option>
+              <mat-option value="2">Other</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
+
+          <mat-form-field appearance="outline">
+            <mat-label>Phone</mat-label>
+            <input matInput formControlName="contactNo" />
+            <mat-icon matSuffix>phone</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Birth Day</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="birthDate">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+
+          <div class="terms">
+            <mat-checkbox formControlName="terms">
+              <p>
+                I agree to the Zokdee's <a href="javascript:void(0);">terms</a> and conditions</p>
+            </mat-checkbox>
+            <mat-error *ngIf="registerForm.controls['terms'].invalid">
+              {{getErrorMessage('terms')}}
+            </mat-error>
+          </div>
+
+          <div class="btn-wrap">
+            <button type="button" mat-button [routerLink]="['/login']">Login</button>
+            <button mat-button class="primary" (click)="onSubmit()">Register</button>
+          </div>
+
+
+
+
+        </form>
+      </section>
+    </div>
+  </mat-card>
+</main>

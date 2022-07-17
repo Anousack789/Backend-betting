@@ -8,11 +8,13 @@ const client = require('../utils/redis');
 const passport = require('passport');
 const myCrypto = require('../utils/my-crypto');
 const { sequelize } = require('../utils/database');
+const logger = require('../utils/logger');
 const User = require('../db/models/user')(sequelize);
 const UserRole = require('../db/models/userrole')(sequelize);
 const Role = require('../db/models/role')(sequelize);
 const Menu = require('../db/models/menu')(sequelize);
 const RoleMenu = require('../db/models/rolemenu')(sequelize);
+const RegisterLog = require('../db/models/registerlog')(sequelize);
 User.hasMany(UserRole, { foreignKey: 'UserId' });
 Role.hasMany(UserRole, { foreignKey: 'RoleId' });
 UserRole.belongsTo(User, { foreignKey: 'UserId' });
@@ -141,5 +143,56 @@ router.post(
     }
   }
 );
+
+router.post('/auth/register', async (req, res) => {
+  try {
+    const {
+      token,
+      userId,
+      userName,
+      password,
+      firstName,
+      lastName,
+      birthDate,
+      gender,
+      email,
+      contactNo,
+    } = req.body;
+    const decryptToken = myCrypto.decrypt(token);
+    if (decryptToken.limit == 'no limit') {
+      const { providerId, registerType } = decryptToken;
+      let myPass = '';
+      if (password) {
+        myPass = await bcryptjs.hash(password, 10);
+      }
+      const createUser = await User.create({
+        UserId: userId,
+        UserName: userName ?? email,
+        Password: myPass,
+        FirstName: firstName,
+        LastName: lastName,
+        BirthDate: birthDate,
+        Gender: gender,
+        Email: email,
+        ContactNo: contactNo,
+        HashPass: myPass != '',
+        Wallet: 0,
+        BonusCredit: 0,
+        DateRegistration: new Date(),
+        LastUpdated: new Date(),
+      });
+
+      await RegisterLog.create({
+        PrivderId: providerId,
+        ReceiverId: createUser.id,
+        RegisterType: registerType,
+      });
+    } else {
+    }
+  } catch (err) {
+    logger.error(err);
+    return res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
 
 module.exports = router;

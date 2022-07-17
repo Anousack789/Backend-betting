@@ -15,6 +15,8 @@ import { LoadingService } from 'src/app/services/loading.service';
 import { MySocketIo } from 'src/app/utils/my-socket-io';
 import { SubSink } from 'subsink';
 import { delay } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { DEditBalanceDialogComponent } from './d-edit-balance-dialog/d-edit-balance-dialog.component';
 
 @Component({
   selector: 'app-d-agent-management',
@@ -27,12 +29,13 @@ export class DAgentManagementComponent
   constructor(
     private api: AgentApiService,
     private loading: LoadingService,
-    private socket: MySocketIo,
-    private cookie: CookieService
+    private dialog: MatDialog
   ) {}
 
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
   @ViewChild(MatSort) sort: MatSort | undefined;
+
+  private walletId = 0;
 
   onLoading = false;
   private subs = new SubSink();
@@ -46,6 +49,7 @@ export class DAgentManagementComponent
     'ContactNo',
     'Wallet',
     'BonusCredit',
+    'UserStatus',
     'process',
   ];
 
@@ -87,5 +91,21 @@ export class DAgentManagementComponent
   openDetail(id: number) {
     this.onLoading = !this.onLoading;
     this.loading.setLoading = this.onLoading;
+  }
+
+  openEditBalanceDialog(id: number, amount: number) {
+    this.walletId = id;
+    const dialogRef = this.dialog.open(DEditBalanceDialogComponent, {
+      data: { amount },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        const datas = this.dataSource.data;
+        const index = datas.findIndex((data) => data.id === this.walletId);
+        datas[index].Wallet = result;
+        this.dataSource.data = datas;
+        this.walletId = 0;
+      }
+    });
   }
 }

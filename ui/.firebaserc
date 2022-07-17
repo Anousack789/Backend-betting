@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "zokdee-8686c": {
+      "hosting": {
+        "ui": [
+          "zokdee-8686c"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "zokdee-8686c"
+  }
+}

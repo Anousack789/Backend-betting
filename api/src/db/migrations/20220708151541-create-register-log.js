@@ -9,7 +9,7 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       Token: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(1024),
       },
       RegisterType: {
         type: Sequelize.INTEGER,
@@ -20,10 +20,12 @@ module.exports = {
       ReceiverId: {
         type: Sequelize.INTEGER,
       },
-      CreatedAt: {
+      createdAt: {
+        allowNull: false,
         type: Sequelize.DATE,
       },
-      UpdatedAt: {
+      updatedAt: {
+        allowNull: false,
         type: Sequelize.DATE,
       },
     });

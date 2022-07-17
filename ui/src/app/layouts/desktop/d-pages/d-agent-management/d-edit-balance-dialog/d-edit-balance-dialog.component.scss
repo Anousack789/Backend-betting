@@ -1,0 +1,5 @@
+@use "../../../../../foundations/colors.scss" as colors;
+.btn-primary {
+  background-color: colors.$primaryColor;
+  color: white;
+}

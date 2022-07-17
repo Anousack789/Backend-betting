@@ -1,0 +1,14 @@
+<main>
+  <h1 mat-dialog-title>Balance</h1>
+  <div mat-dialog-content>
+    <mat-form-field appearance="outline">
+      <mat-label>Amount</mat-label>
+      <input matInput [(ngModel)]="data.amount">
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button mat-button class="btn-primary" [mat-dialog-close]="data.amount" cdkFocusInitial>Ok</button>
+  </div>
+
+</main>

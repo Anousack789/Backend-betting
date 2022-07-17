@@ -7,31 +7,36 @@
       <section>
         <form novalidate [formGroup]="loginForm" (ngSubmit)="onSubmit()">
           <mat-form-field appearance="outline">
-            <mat-label>Enter your username</mat-label>
-            <input
-              matInput
-              placeholder="pat@example.com"
-              formControlName="userName"
-            />
+            <mat-label>User Name</mat-label>
+            <input matInput placeholder="UserName_123" formControlName="userName" />
             <mat-error *ngIf="loginForm.controls['userName'].invalid">{{
               getErrorMessage("userName")
-            }}</mat-error>
+              }}</mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
-            <mat-label>Enter your password</mat-label>
-            <input
-              matInput
-              placeholder="123456"
-              formControlName="password"
-              type="password"
-            />
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="123456" formControlName="password" type="password" />
             <mat-error *ngIf="loginForm.controls['password'].invalid">{{
               getErrorMessage("password")
-            }}</mat-error>
+              }}</mat-error>
           </mat-form-field>
-
-          <button mat-raised-button color="primary">Login</button>
+          <div class="remember-password">
+            <mat-checkbox formControlName="rememberPassword">Remember me</mat-checkbox>
+          </div>
+          <div class="btn-wrap">
+            <button mat-button [routerLink]="['/register']" type="button">Register</button>
+            <button mat-raised-button class="primary">Login</button>
+          </div>
+          <mat-divider></mat-divider>
+          <div class="social-wrap">
+            <button mat-button class="social facebook">
+              <img src="assets/facebook-brands.svg" alt="">
+            </button>
+            <button mat-button class="social google">
+              <img src="assets/google-brands.svg" alt="">
+            </button>
+          </div>
         </form>
       </section>
     </div>

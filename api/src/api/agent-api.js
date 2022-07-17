@@ -45,6 +45,7 @@ router.get('/agents', async (req, res) => {
       resultUser = resultUser.filter(
         (v, i, s) => s.findIndex((v2) => v2.id === v.id) === i
       );
+      resultUser = resultUser.filter((fUser) => fUser.id != req.user.id);
       res.status(200).json(resultUser);
     } else if (user.roles.includes('Master Agent')) {
       const users = await User.findAndCountAll({
