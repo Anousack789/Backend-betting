@@ -1,0 +1,83 @@
+<main *ngIf="detail">
+  <div class="content">
+    <div class="content-side content-left-side">
+      <div class="content-item">
+        <p>User Name</p>
+        <p>: &nbsp;&nbsp;&nbsp;&nbsp;{{detail.UserName}}</p>
+      </div>
+      <div class="content-item">
+        <p>First Name</p>
+        <p>: &nbsp;&nbsp;&nbsp;&nbsp;{{detail.FirstName}}</p>
+      </div>
+      <div class="content-item">
+        <p>Last Name</p>
+        <p>: &nbsp;&nbsp;&nbsp;&nbsp;{{detail.LastName}}</p>
+      </div>
+      <div class="content-item">
+        <p>Gender</p>
+        <div [ngSwitch]="detail.Gender">
+          <div *ngSwitchCase="1">: &nbsp;&nbsp;&nbsp;&nbsp;Female</div>
+          <div *ngSwitchCase="2">: &nbsp;&nbsp;&nbsp;&nbsp;Other</div>
+          <div *ngSwitchDefault>: &nbsp;&nbsp;&nbsp;&nbsp;Male</div>
+        </div>
+      </div>
+      <div class="content-item">
+        <p>Email</p>
+        <p>: &nbsp;&nbsp;&nbsp;&nbsp;{{detail.Email}}</p>
+      </div>
+      <div class="content-item">
+        <p>Phone</p>
+        <p>: &nbsp;&nbsp;&nbsp;&nbsp;{{detail.ContactNo}}</p>
+      </div>
+      <div class="content-item">
+        <p>Birth Day</p>
+        <p>: &nbsp;&nbsp;&nbsp;&nbsp;{{detail.BirthDate | date : 'yyyy-MM-dd'}}</p>
+      </div>
+      <div class="content-item">
+        <p>Date of Registration</p>
+        <p>: &nbsp;&nbsp;&nbsp;&nbsp;{{detail.DateOfRegistration | date : 'yyyy-MM-dd'}}</p>
+      </div>
+
+    </div>
+    <div class="content-side content-right-side">
+      <div class="content-item">
+        <p>Wallet</p>
+        <p>: &nbsp;&nbsp;&nbsp;&nbsp;{{detail.Wallet}}</p>
+      </div>
+      <div class="content-item">
+        <p>Bonus</p>
+        <p>: &nbsp;&nbsp;&nbsp;&nbsp;{{detail.BonusCredit}}</p>
+      </div>
+      <div class="content-item">
+        <p>Bank Name</p>
+        <p>: &nbsp;&nbsp;&nbsp;&nbsp;{{detail.BankName}}</p>
+      </div>
+      <div class="content-item">
+        <p>Bank Account</p>
+        <p>: &nbsp;&nbsp;&nbsp;&nbsp;{{detail.BankAccount}}</p>
+      </div>
+      <div class="content-item">
+        <p>Withdrawal Detail</p>
+        <p>: &nbsp;&nbsp;&nbsp;&nbsp;{{detail.WithdrawalDetails}}</p>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="content-item" style="display: flex; align-items: center;">
+        <p style="margin-bottom: 0;">Status</p>
+        <div [ngSwitch]="detail.UserStatus">: &nbsp;&nbsp;&nbsp;&nbsp;
+          <button mat-button [matMenuTriggerFor]="menu" [ngSwitch]="detail.UserStatus" style="width: 150px; text-align: left;">
+
+            <p *ngSwitchCase="1" class="status-active"> 🟢&nbsp;&nbsp;&nbsp;<span>Active</span></p>
+            <p *ngSwitchCase="2" class="status-suspended">🟠&nbsp;&nbsp;&nbsp;<span>Suspended</span></p>
+            <p *ngSwitchDefault class="status-inactive">🔴&nbsp;&nbsp;&nbsp;<span>Inactive</span></p>
+
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="updateUserStatus(0)">Inactive</button>
+            <button mat-menu-item (click)="updateUserStatus(1)">Active</button>
+            <button mat-menu-item (click)="updateUserStatus(2)">Suspended</button>
+          </mat-menu>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

@@ -10,8 +10,18 @@ import { Config } from '../utils/config';
 export class AgentApiService {
   constructor(private http: HttpClient) {}
   private url = Config.EndPoint + 'agents';
+  private urlUpdateStatus = Config.EndPoint + 'agents/update-status';
+  private urlContract = Config.EndPoint + 'agents/contracts';
 
-  get(): Observable<IUser[]> {
+  gets(): Observable<IUser[]> {
     return this.http.get<IUser[]>(this.url).pipe(take(1));
+  }
+
+  updateStatus(updateObj: any): Observable<any> {
+    return this.http.post<any>(this.urlUpdateStatus, updateObj).pipe(take(1));
+  }
+
+  getContracts(id: number): Observable<any> {
+    return this.http.get<any>(`${this.urlContract}/${id}`).pipe(take(1));
   }
 }

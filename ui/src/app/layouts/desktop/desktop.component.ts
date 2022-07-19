@@ -10,6 +10,7 @@ import { IMenu } from 'src/app/interfaces/i-menu';
 import { LoadingService } from 'src/app/services/loading.service';
 import { MenuService } from 'src/app/services/menu.service';
 import { SubSink } from 'subsink';
+import Swal from 'sweetalert2';
 import { LayoutsService } from '../layouts.service';
 
 const animationParams = {
@@ -104,7 +105,14 @@ export class DesktopComponent implements OnInit, OnDestroy {
         this.router.navigate(['/login']);
       },
       error: (err) => {
-        console.log(err);
+        console.error(err);
+        this.loading.setLoading = false;
+        Swal.fire({
+          title: 'Error',
+          text: err.error.message,
+          icon: 'error',
+          confirmButtonText: 'OK',
+        });
       },
     });
   }

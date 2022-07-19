@@ -1,0 +1,31 @@
+.content {
+  display: flex;
+  justify-content: space-between;
+  padding: 40px 0;
+  .content-side {
+    width: 100%;
+    .content-item {
+      display: flex;
+      p:first-child {
+        min-width: 150px;
+        text-align: right;
+        margin-right: 20px;
+        text-align: left;
+        margin-bottom: 20px;
+      }
+      button {
+        border: gainsboro solid 1px;
+        p {
+          margin: 0;
+          display: flex;
+        }
+        span {
+          margin-left: 10px;
+        }
+      }
+    }
+    .mat-divider {
+      margin: 10px 0;
+    }
+  }
+}

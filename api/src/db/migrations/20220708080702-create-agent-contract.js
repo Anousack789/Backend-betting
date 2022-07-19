@@ -29,9 +29,6 @@ module.exports = {
       RecruitType: {
         type: Sequelize.INTEGER,
       },
-      DateCreated: {
-        type: Sequelize.DATE,
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

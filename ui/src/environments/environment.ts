@@ -14,6 +14,7 @@ export const environment = {
   production: false,
   cryptoKey: 'jBagxdUgFiZjndTBddewFn5ufZTAZebr',
   iv: '6480296387468990',
+  endpoint: 'http://localhost:3000',
 };
 
 /*

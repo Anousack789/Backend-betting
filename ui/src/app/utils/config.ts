@@ -1,4 +1,5 @@
+import { environment } from 'src/environments/environment';
 export class Config {
-  public static EndPoint = 'http://localhost:3000/api/v1/';
-  public static FileUrl = 'http://localhost:3000/files/';
+  public static EndPoint = environment.endpoint + '/api/v1/';
+  public static FileUrl = environment.endpoint + '/files/';
 }

@@ -1,4 +1,4 @@
-<main class="table-container">
+<main class="table-container" *ngIf="!detail; else showDetail">
   <div class="mat-elevation-z8">
     <div class="table-header">
       <div class="filter-container">
@@ -93,3 +93,6 @@
     </div>
   </div>
 </main>
+<ng-template #showDetail>
+  <app-d-agent-detail [detail]="detail" (close)="detail = undefined"></app-d-agent-detail>
+</ng-template>

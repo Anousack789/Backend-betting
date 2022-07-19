@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AdminApiService } from 'src/app/apis/admin-api.service';
 import { TransactionApiService } from 'src/app/apis/transaction-api.service';
+import { LoadingService } from 'src/app/services/loading.service';
 import { SubSink } from 'subsink';
 import Swal from 'sweetalert2';
 
@@ -10,7 +11,10 @@ import Swal from 'sweetalert2';
   styleUrls: ['./d-transactions.component.scss'],
 })
 export class DTransactionsComponent implements OnInit, OnDestroy {
-  constructor(private api: TransactionApiService) {}
+  constructor(
+    private api: TransactionApiService,
+    private loading: LoadingService
+  ) {}
 
   private subs = new SubSink();
 
@@ -27,8 +31,9 @@ export class DTransactionsComponent implements OnInit, OnDestroy {
         this.onLoading = false;
         Swal.fire({
           title: 'Error',
-          text: err.message,
+          text: err.message || 'Something went wrong',
           icon: 'error',
+          confirmButtonText: 'Ok',
         });
       },
     });

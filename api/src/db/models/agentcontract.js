@@ -11,7 +11,6 @@ module.exports = (sequelize) => {
       WithdrawalType: DataTypes.INTEGER, // 0: value, 1: percentage
       RecruitCommission: DataTypes.DOUBLE,
       RecruitType: DataTypes.INTEGER, // 0: value, 1: percentage
-      DateCreated: DataTypes.DATE,
     },
     {
       sequelize,

@@ -12,9 +12,17 @@ export class DEditBalanceDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: { amount: number }
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.amount = this.data.amount;
+  }
+
+  amount = 0;
 
   onCancel(): void {
     this.dialogRef.close();
+  }
+
+  onAmountChange() {
+    this.amount = Number(this.amount);
   }
 }

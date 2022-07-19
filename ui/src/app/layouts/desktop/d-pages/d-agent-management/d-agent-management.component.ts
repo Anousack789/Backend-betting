@@ -17,6 +17,7 @@ import { SubSink } from 'subsink';
 import { delay } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { DEditBalanceDialogComponent } from './d-edit-balance-dialog/d-edit-balance-dialog.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-d-agent-management',
@@ -40,7 +41,7 @@ export class DAgentManagementComponent
   onLoading = false;
   private subs = new SubSink();
 
-  detail = undefined;
+  detail: IUser | undefined;
 
   dataSource = new MatTableDataSource<IUser>();
   displayedColumns: string[] = [
@@ -56,16 +57,23 @@ export class DAgentManagementComponent
   ngOnInit(): void {
     this.onLoading = true;
     this.loading.setLoading = true;
-    this.subs.sink = this.api
-      .get()
-      .pipe(delay(200))
-      .subscribe({
-        next: (data) => {
-          this.onLoading = false;
-          this.loading.setLoading = false;
-          this.dataSource.data = data;
-        },
-      });
+    this.subs.sink = this.api.gets().subscribe({
+      next: (data) => {
+        this.onLoading = false;
+        this.loading.setLoading = false;
+        this.dataSource.data = data;
+      },
+      error: (err) => {
+        this.onLoading = false;
+        this.loading.setLoading = false;
+        Swal.fire({
+          title: 'Error',
+          text: err.message || 'Something went wrong',
+          icon: 'error',
+          confirmButtonText: 'Ok',
+        });
+      },
+    });
   }
 
   ngAfterViewInit(): void {
@@ -89,8 +97,8 @@ export class DAgentManagementComponent
   }
 
   openDetail(id: number) {
-    this.onLoading = !this.onLoading;
-    this.loading.setLoading = this.onLoading;
+    const data = this.dataSource.data.find((item) => item.id === id);
+    this.detail = data;
   }
 
   openEditBalanceDialog(id: number, amount: number) {

@@ -7,6 +7,7 @@ import { MyCryptoService } from 'src/app/services/my-crypto.service';
 import { SubSink } from 'subsink';
 import Swal from 'sweetalert2';
 import {} from '@fortawesome/free-solid-svg-icons';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-d-login',
@@ -19,7 +20,8 @@ export class DLoginComponent implements OnInit, OnDestroy {
     private authService: AuthApiService,
     private router: Router,
     private myCrypto: MyCryptoService,
-    private menuService: MenuService
+    private menuService: MenuService,
+    private loading: LoadingService
   ) {}
 
   loginForm = this.fb.group({
@@ -59,7 +61,15 @@ export class DLoginComponent implements OnInit, OnDestroy {
           }
         },
         error: (err) => {
-          console.log(err);
+          console.error(err);
+          this.loading.setLoading = false;
+
+          Swal.fire({
+            title: 'Error',
+            text: err.message || 'Something went wrong',
+            icon: 'error',
+            confirmButtonText: 'Ok',
+          });
         },
       });
   }
@@ -95,9 +105,11 @@ export class DLoginComponent implements OnInit, OnDestroy {
         },
         error: (err) => {
           this.onLoading = false;
+
           Swal.fire({
+            title: 'Error',
+            text: err.message || 'Something went wrong',
             icon: 'error',
-            text: err.message ?? 'Something Wrong!!',
           });
         },
       });

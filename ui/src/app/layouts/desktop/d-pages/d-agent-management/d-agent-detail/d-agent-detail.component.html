@@ -1,0 +1,30 @@
+<main>
+  <div class="detail-container">
+    <mat-card>
+      <div class="detail-content">
+        <div class="detail-tabs">
+          <a class="tab" href="javascript:void(0);" (click)="tabIndex = 0;" [ngClass]="{'active': tabIndex == 0}">
+            <span class="tab-text">Information</span>
+          </a>
+          <a class="tab" href="javascript:void(0);" (click)="tabIndex = 1;" [ngClass]="{'active': tabIndex == 1}">
+            <span class="tab-text">Contract</span>
+          </a>
+          <a class="tab" href="javascript:void(0);" (click)="tabIndex = 2;" [ngClass]="{'active': tabIndex == 2}">
+            <span class="tab-text">Players</span>
+          </a>
+          <div class="spacer"></div>
+          <a href="javascript:void(0);" style="color: red" (click)="onClose()">
+            <mat-icon>close</mat-icon>
+          </a>
+        </div>
+        <div class="detail-wrap">
+          <div [ngSwitch]="tabIndex">
+            <app-d-agent-contract *ngSwitchCase="1" [id]="detail?.id ?? 0"></app-d-agent-contract>
+            <app-d-agent-players *ngSwitchCase="2"></app-d-agent-players>
+            <app-d-agent-information *ngSwitchDefault [detail]="detail"></app-d-agent-information>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</main>

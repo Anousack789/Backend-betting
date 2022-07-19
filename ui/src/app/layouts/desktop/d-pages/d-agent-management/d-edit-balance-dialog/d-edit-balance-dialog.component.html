@@ -3,12 +3,12 @@
   <div mat-dialog-content>
     <mat-form-field appearance="outline">
       <mat-label>Amount</mat-label>
-      <input matInput [(ngModel)]="data.amount">
+      <input matInput type="number" [(ngModel)]="amount" (ngModelChange)="onAmountChange()">
     </mat-form-field>
   </div>
   <div mat-dialog-actions>
     <button mat-button (click)="onCancel()">Cancel</button>
-    <button mat-button class="btn-primary" [mat-dialog-close]="data.amount" cdkFocusInitial>Ok</button>
+    <button mat-button class="btn-primary" [mat-dialog-close]="amount" cdkFocusInitial>Ok</button>
   </div>
 
 </main>
