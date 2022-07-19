@@ -1,7 +1,6 @@
 'use strict';
-const express = require('express');
+const router = require('express').Router();
 const passport = require('passport');
-const router = express.Router();
 const { sequelize } = require('../utils/database');
 const User = require('../db/models/user')(sequelize);
 const UserRole = require('../db/models/userrole')(sequelize);
@@ -17,8 +16,9 @@ RoleMenu.belongsTo(Menu, { foreignKey: 'MenuId' });
 Menu.hasMany(RoleMenu, { foreignKey: 'MenuId' });
 Role.hasMany(RoleMenu, { foreignKey: 'RoleId' });
 
-router.use('/admin', passport.authenticate('jwt', { session: false }));
-router.get('/admin/profile', async (req, res) => {
+const myPass = passport.authenticate('jwt', { session: false });
+
+router.get('/admin/profile', myPass, async (req, res) => {
   const findUser = await User.findOne({
     where: {
       id: req.user.id,

@@ -1,6 +1,7 @@
 import {
   AfterViewInit,
   Component,
+  Input,
   OnDestroy,
   OnInit,
   ViewChild,
@@ -24,6 +25,7 @@ export class DAgentPlayersComponent
 {
   constructor(private loading: LoadingService, private api: PlayerApiService) {}
 
+  @Input() id = 0;
   private subs = new SubSink();
 
   displayedColumns: string[] = ['Player Id', 'Name', 'Balance'];
