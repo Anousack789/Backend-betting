@@ -1,25 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DesktopComponent } from './desktop.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: DesktopComponent,
     loadChildren: () =>
       import('./d-pages/d-page.module').then((m) => m.DPageModule),
   },
   {
     path: 'login',
     loadChildren: () =>
-      import('./d-pages/d-login/d-login.module').then((m) => m.DLoginModule),
+      import('./d-login/d-login.module').then((m) => m.DLoginModule),
   },
   {
     path: 'register',
     loadChildren: () =>
-      import('./d-pages/d-register/d-register.module').then(
-        (m) => m.DRegisterModule
-      ),
+      import('./d-register/d-register.module').then((m) => m.DRegisterModule),
   },
 ];
 

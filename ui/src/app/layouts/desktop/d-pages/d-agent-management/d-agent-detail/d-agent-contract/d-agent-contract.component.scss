@@ -1,0 +1,18 @@
+@use "./../../../../../../foundations/colors.scss" as colors;
+main {
+  padding: 50px 0;
+
+  .field-container {
+    display: flex;
+    gap: 20px;
+    label {
+      min-width: 200px;
+      margin-top: 20px;
+      font-size: 24px;
+    }
+  }
+  .btn-primary {
+    background-color: colors.$primaryColor;
+    color: white;
+  }
+}

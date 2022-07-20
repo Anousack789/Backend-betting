@@ -7,13 +7,12 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpInterceptorService } from './services/http-interceptor.service';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LoadingComponent } from './components/loading/loading.component';
 import { CookieService } from 'ngx-cookie-service';
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
-import { provideAuth,getAuth } from '@angular/fire/auth';
-import { provideMessaging,getMessaging } from '@angular/fire/messaging';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { provideMessaging, getMessaging } from '@angular/fire/messaging';
 
 @NgModule({
   declarations: [AppComponent, PageNotFoundComponent, LoadingComponent],
@@ -22,7 +21,6 @@ import { provideMessaging,getMessaging } from '@angular/fire/messaging';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    FontAwesomeModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideMessaging(() => getMessaging()),

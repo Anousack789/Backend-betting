@@ -1,5 +1,5 @@
-@use "../../foundations/colors.scss" as colors;
-@use "../../foundations/box-shadows.scss" as boxShadows;
+@use "../../../foundations/colors.scss" as colors;
+@use "../../../foundations/box-shadows.scss" as boxShadows;
 $sideBarWidth: 170px;
 main {
   display: flex;

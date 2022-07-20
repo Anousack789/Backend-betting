@@ -11,13 +11,6 @@
             <mat-icon [innerHTML]="item.MenuIcon"></mat-icon>
             <p>{{ item.MenuDisplayName }}</p>
           </a>
-          <!-- <div class="sub-menu" *ngIf="subMenu(item.id).length > 0 && showIndex == i + 1">
-            <div class="sub-menu-item" *ngFor="let sub of subMenu(item.id)">
-              <a href="javascript:void(0);" [routerLink]="[sub.MenuUrl]" routerLinkActive="router-link-active">
-                <p>{{ sub.MenuDisplayName }}</p>
-              </a>
-            </div>
-          </div> -->
         </div>
       </div>
     </div>

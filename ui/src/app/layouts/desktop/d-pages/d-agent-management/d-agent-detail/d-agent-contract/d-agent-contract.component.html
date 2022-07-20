@@ -1,1 +1,53 @@
-<p>d-agent-contract works!</p>
+<main>
+  <form novalidate [formGroup]="contractForm">
+    <div class="form-wrapper">
+      <div class="field-container">
+        <label>Deposit</label>
+        <mat-form-field appearance="outline">
+          <mat-label>Commission</mat-label>
+          <input matInput formControlName="DepositCommission">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+
+          <mat-label>Type</mat-label>
+          <mat-select formControlName="DepositType">
+            <mat-option [value]="0">Value</mat-option>
+            <mat-option [value]="1">%</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="field-container">
+        <label>Withdrawal </label>
+        <mat-form-field appearance="outline">
+          <mat-label>Commission</mat-label>
+          <input matInput formControlName="WithdrawalCommission">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+
+          <mat-label>Type</mat-label>
+          <mat-select formControlName="WithdrawalType">
+            <mat-option [value]="0">Value</mat-option>
+            <mat-option [value]="1">%</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="field-container">
+        <label>Recruit </label>
+        <mat-form-field appearance="outline">
+          <mat-label>Commission</mat-label>
+          <input matInput formControlName="RecruitCommission">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Type</mat-label>
+          <mat-select formControlName="RecruitType">
+            <mat-option [value]="0">Value</mat-option>
+            <mat-option [value]="1">%</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="btn-container">
+        <button mat-button class="btn-primary" (click)="onSubmit()">Submit</button>
+      </div>
+    </div>
+  </form>
+</main>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, debounceTime, delay } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -7,7 +7,7 @@ import { BehaviorSubject, debounceTime, delay } from 'rxjs';
 export class LoadingService {
   constructor() {}
 
-  isLoading = new BehaviorSubject(false);
+  private isLoading = new BehaviorSubject(false);
 
   set setLoading(value: boolean) {
     this.isLoading.next(value);

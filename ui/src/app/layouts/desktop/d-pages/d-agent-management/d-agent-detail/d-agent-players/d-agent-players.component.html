@@ -1,1 +1,28 @@
-<p>d-agent-players works!</p>
+<main>
+  <div class="mat-elevation-z8">
+    <table mat-table *ngIf="dataSource" [dataSource]="dataSource" matSort>
+
+      <!-- ID Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+        <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+      </ng-container>
+
+      <!-- User Name Column -->
+      <ng-container matColumnDef="UserName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+        <td mat-cell *matCellDef="let row"> {{row.UserName}}% </td>
+      </ng-container>
+
+      <!-- Wallet Column -->
+      <ng-container matColumnDef="Wallet">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Balance </th>
+        <td mat-cell *matCellDef="let row"> {{row.Wallet}} </td>
+      </ng-container>
+
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+  </div>
+
+</main>

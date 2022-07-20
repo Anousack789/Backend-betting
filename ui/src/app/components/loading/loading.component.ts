@@ -34,7 +34,7 @@ export class LoadingComponent implements OnInit {
     this.loadingService._isLoading
       .pipe(
         switchMap((res) => {
-          return of(res).pipe(delay(res ? 0 : 1000));
+          return of(res).pipe(delay(res ? 0 : 500));
         })
       )
       .subscribe((res) => {

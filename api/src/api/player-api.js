@@ -34,9 +34,7 @@ router.get('/players', async (req, res) => {
         const playerIds = registerReceiver.map((item) => item.ReceiverId);
         const players = await User.findAll({
           where: {
-            id: {
-              [sequelize.Op.ne]: playerIds,
-            },
+            id: playerIds,
           },
           include: [
             {

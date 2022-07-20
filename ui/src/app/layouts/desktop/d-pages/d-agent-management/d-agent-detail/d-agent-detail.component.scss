@@ -14,9 +14,8 @@
     &:first-child {
       border-top-left-radius: 5px;
     }
-    &:last-child {
+    &:nth-child(3) {
       border-top-right-radius: 5px;
-      border-right: none;
     }
     &.active {
       background-color: colors.$secondColor;

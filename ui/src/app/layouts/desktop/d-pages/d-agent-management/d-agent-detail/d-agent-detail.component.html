@@ -20,7 +20,7 @@
         <div class="detail-wrap">
           <div [ngSwitch]="tabIndex">
             <app-d-agent-contract *ngSwitchCase="1" [id]="detail?.id ?? 0"></app-d-agent-contract>
-            <app-d-agent-players *ngSwitchCase="2"></app-d-agent-players>
+            <app-d-agent-players *ngSwitchCase="2" [id]="detail?.id ?? 0"></app-d-agent-players>
             <app-d-agent-information *ngSwitchDefault [detail]="detail"></app-d-agent-information>
           </div>
         </div>

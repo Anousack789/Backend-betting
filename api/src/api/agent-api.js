@@ -1,7 +1,7 @@
 const express = require('express');
 const passport = require('passport');
 const router = express.Router();
-
+const { Op } = require('sequelize');
 const { sequelize } = require('../utils/database');
 const User = require('../db/models/user')(sequelize);
 const UserRole = require('../db/models/userrole')(sequelize);
@@ -16,6 +16,16 @@ User.hasMany(AgentContract, { foreignKey: 'AgentId' });
 AgentContract.belongsTo(User, { foreignKey: 'AgentId' });
 
 const myPass = passport.authenticate('jwt', { session: false });
+
+const checkPermission = async (providerId, receiverId) => {
+  const registerLog = await RegisterLog.findOne({
+    where: {
+      ProviderId: providerId,
+      ReceiverId: receiverId,
+    },
+  });
+  return registerLog != null;
+};
 
 router.get('/agents', myPass, async (req, res) => {
   const user = req.user;
@@ -83,7 +93,7 @@ router.get('/agents', myPass, async (req, res) => {
   }
 });
 
-router.post('/agents/update-status', myPass, async (req, res) => {
+router.put('/agents/update-status', myPass, async (req, res) => {
   const user = req.user;
   console.log(user);
   if (!user) return res.status(401).send({ message: 'Unauthorized' });
@@ -109,13 +119,8 @@ router.get('/agents/contracts/:id', myPass, async (req, res) => {
   try {
     if (user.roles.includes('Admin') || user.roles.includes('Master Agent')) {
       const { id } = req.params;
-      const registerLog = await RegisterLog.findOne({
-        where: {
-          ProviderId: user.id,
-          ReceiverId: id,
-        },
-      });
-      if (!registerLog)
+      const permission = await checkPermission(user.id, id);
+      if (!permission)
         return res.status(404).send({ message: 'User not found' });
       const agentcontract = await AgentContract.findOne({
         where: {
@@ -136,6 +141,94 @@ router.get('/agents/contracts/:id', myPass, async (req, res) => {
       } else {
         return res.status(200).json(agentcontract.dataValues);
       }
+    } else {
+      return res.status(401).send({ message: 'Unauthorized' });
+    }
+  } catch (err) {
+    return res.status(500).send({ message: err.message });
+  }
+});
+
+router.put('/agents/contracts/:id', myPass, async (req, res) => {
+  const user = req.user;
+  if (!user) return res.status(401).send({ message: 'Unauthorized' });
+  try {
+    if (user.roles.includes('Admin') || user.roles.includes('Master Agent')) {
+      const { id } = req.params;
+
+      const permission = await checkPermission(user.id, id);
+      if (!permission)
+        return res.status(404).send({ message: "You don't have Permission!!" });
+
+      const {
+        DepositCommission,
+        DepositType,
+        WithdrawalCommission,
+        WithdrawalType,
+        RecruitCommission,
+        RecruitType,
+      } = req.body;
+      const agentcontract = await AgentContract.findOne({
+        where: {
+          AgentId: id,
+        },
+      });
+      if (!agentcontract) {
+        const createAgentContract = await AgentContract.create({
+          AgentId: id,
+          DepositCommission,
+          DepositType,
+          WithdrawalCommission,
+          WithdrawalType,
+          RecruitCommission,
+          RecruitType,
+        });
+        return res.status(200).json(createAgentContract);
+      } else {
+        agentcontract.DepositCommission = DepositCommission;
+        agentcontract.DepositType = DepositType;
+        agentcontract.WithdrawalCommission = WithdrawalCommission;
+        agentcontract.WithdrawalType = WithdrawalType;
+        agentcontract.RecruitCommission = RecruitCommission;
+        agentcontract.RecruitType = RecruitType;
+        await agentcontract.save();
+        return res.status(200).json(agentcontract.dataValues);
+      }
+    } else {
+      return res.status(401).send({ message: 'Unauthorized' });
+    }
+  } catch (err) {
+    return res.status(500).send({ message: err.message });
+  }
+});
+
+router.get('/agents/players/:id', myPass, async (req, res) => {
+  const user = req.user;
+  if (!user) return res.status(401).send({ message: 'Unauthorized' });
+  try {
+    if (user.roles.includes('Admin') || user.roles.includes('Master Agent')) {
+      const { id } = req.params;
+      const permission = await checkPermission(user.id, id);
+      if (!permission)
+        return res.status(404).send({ message: 'User not found' });
+
+      const playerIds = await RegisterLog.findAll({
+        where: {
+          ProviderId: id,
+          RegisterType: 2,
+        },
+        attributes: ['ReceiverId'],
+      });
+      const players = await User.findAndCountAll({
+        where: {
+          id: {
+            [Op.in]: playerIds.map((p) => p.ReceiverId),
+          },
+        },
+        attributes: ['id', 'UserName', 'Wallet'],
+      });
+
+      res.status(200).json(players);
     } else {
       return res.status(401).send({ message: 'Unauthorized' });
     }

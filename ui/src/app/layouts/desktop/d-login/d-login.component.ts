@@ -6,7 +6,6 @@ import { MenuService } from 'src/app/services/menu.service';
 import { MyCryptoService } from 'src/app/services/my-crypto.service';
 import { SubSink } from 'subsink';
 import Swal from 'sweetalert2';
-import {} from '@fortawesome/free-solid-svg-icons';
 import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
